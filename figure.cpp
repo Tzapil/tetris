@@ -1,9 +1,14 @@
 #include "figure.h"
 #include "figures.h"
 
-Figure::Figure(uint x, uint y, uint angle):angle_(angle),x_(x),y_(y)
+Figure::Figure(uint x, uint y, uint angle):type_((uint)rand()%7),angle_(angle),x_(x),y_(y)
 {
-    copy_figure((uint)rand()%7);
+    copy_figure(type_);
+}
+
+Figure::Figure(const Figure &c_):type_(c_.type()),angle_(c_.angle()),x_(c_.x()),y_(c_.y())
+{
+    copy_figure(type_);
 }
 
 Figure::~Figure()
@@ -11,7 +16,7 @@ Figure::~Figure()
     delete[] map_;
 }
 
-void Figure::move(uint dx, uint dy)
+void Figure::move(int dx, int dy)
 {
     x_ += dx;
     y_ += dy;
@@ -62,12 +67,4 @@ void Figure::copy_figure(uint n)
     int l = strlen(figures[n]);
     map_ = new char[l];
     for(int i=0; map_[i] = figures[n][i]; ++i);
-}
-
-uint Figure::length(const char *str) const
-{
-    uint l = 0;
-    for(;str[l++];);
-
-    return l;
 }
