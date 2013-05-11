@@ -16,6 +16,16 @@ Figure::~Figure()
     delete[] map_;
 }
 
+void Figure::draw(Painter &p)
+{
+    for(int y=0; y<4; ++y)
+        for(int x=0; x<4; ++x)
+        {
+            if(map(x, y))
+                p.drawPoint(x_ + x, y_ + y);
+        }
+}
+
 void Figure::move(int dx, int dy)
 {
     x_ += dx;

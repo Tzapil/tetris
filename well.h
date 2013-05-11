@@ -2,12 +2,14 @@
 #define WELL_H
 
 #include "figure.h"
+#include "painter.h"
 
 namespace{
     typedef unsigned uint;
 }
 
 class Figure;
+class Painter;
 
 // Класс "колодца"
 class Well
@@ -18,6 +20,8 @@ public:
 
     void addFigure(const Figure &f);         // Добавление фигуры в колодец
     bool isCollision(const Figure &f) const; // Проверка коллизий фигуры
+
+    void draw(Painter &p);
 
     uint checkLines();                       // Проверка и удаление заполненных строк
 private:

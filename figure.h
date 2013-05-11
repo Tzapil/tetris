@@ -4,9 +4,13 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "painter.h"
+
 namespace{
     typedef unsigned uint;
 }
+
+class Painter;
 
 //класс падающей фигуры
 class Figure
@@ -20,6 +24,8 @@ public:
 
     void move(int dx = 0, int dy = 0);              // сдвинуть фигуру
     void rotation(Direction d);                     // поворот
+
+    void draw(Painter &p);
 
     bool map(uint x, uint y) const;                 // вернуть значение поля фигуры(true-поле занято, false - свободно)
 

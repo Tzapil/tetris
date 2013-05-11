@@ -1,12 +1,18 @@
 #include "game.h"
 
-Game::Game():score_(0),well_(new Well()),figure_(new Figure())
+Game::Game(uint w, uint h):score_(0),well_(new Well(w, h)),figure_(new Figure())
 {}
 
 Game::~Game()
 {
     delete figure_;
     delete well_;
+}
+
+void Game::draw(Painter &p)
+{
+    figure_->draw(p);
+    well_->draw(p);
 }
 
 void Game::move()

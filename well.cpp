@@ -18,6 +18,16 @@ Well::Well(uint w, uint h):width_(w),height_(h)
     }
 }
 
+void Well::draw(Painter &p)
+{
+    for(uint y=0; y<height_; ++y)
+        for(uint x=0; x<width_; ++x)
+        {
+            if(map_[y][x])
+                p.drawPoint(x, y);
+        }
+}
+
 void Well::addFigure(const Figure &f)
 {
     for(int y=0; y<4; ++y)

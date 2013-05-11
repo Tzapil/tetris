@@ -16,12 +16,15 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     well.cpp \
     figure.cpp \
-    game.cpp
+    game.cpp \
+    qmypainter.cpp
 
 HEADERS  += mainwindow.h \
     well.h \
     figure.h \
     figures.h \
-    game.h
+    game.h \
+    painter.h \
+    qmypainter.h
 
 QMAKE_CXXFLAGS += -std=gnu++0x
