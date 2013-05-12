@@ -1,12 +1,12 @@
 #include "figure.h"
 #include "figures.h"
 
-Figure::Figure(uint x, uint y, uint angle):type_((uint)rand()%7),angle_(angle),x_(x),y_(y)
+Figure::Figure(uint x, uint y, uint angle):type_((uint)rand() % 7),angle_(angle),x_(x),y_(y),color_(rand() % 19 + 1)
 {
     copy_figure(type_);
 }
 
-Figure::Figure(const Figure &c_):type_(c_.type()),angle_(c_.angle()),x_(c_.x()),y_(c_.y())
+Figure::Figure(const Figure &c_):type_(c_.type()),angle_(c_.angle()),x_(c_.x()),y_(c_.y()),color_(c_.color())
 {
     copy_figure(type_);
 }
@@ -18,6 +18,7 @@ Figure::~Figure()
 
 void Figure::draw(Painter &p)
 {
+    p.setColor(color_);
     for(int y=0; y<4; ++y)
         for(int x=0; x<4; ++x)
         {
@@ -32,7 +33,7 @@ void Figure::move(int dx, int dy)
     y_ += dy;
 }
 
-bool Figure::map(uint x, uint y) const
+int Figure::map(uint x, uint y) const
 {
     static const struct
     {
@@ -63,8 +64,8 @@ bool Figure::map(uint x, uint y) const
         { 0, 0 }, { 1, 0 }, { 2, 0 }, { 3, 0 }
       }
     };
-    return map_[ROTATE[angle_][y * 4 + x].y * 4 +
-                ROTATE[angle_][y * 4 + x].x] != ' ';
+    return (map_[ROTATE[angle_][y * 4 + x].y * 4 +
+                ROTATE[angle_][y * 4 + x].x] != ' '? color_:0);
 }
 
 void Figure::rotation(Direction d)

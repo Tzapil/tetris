@@ -21,13 +21,13 @@ public:
     void addFigure(const Figure &f);         // Добавление фигуры в колодец
     bool isCollision(const Figure &f) const; // Проверка коллизий фигуры
 
-    void draw(Painter &p);
+    void draw(Painter &p);                   // рисование
 
     uint checkLines();                       // Проверка и удаление заполненных строк
 private:
-    uint width_;
+    uint width_;                             // ширина и высота колодца
     uint height_;
-    bool **map_;                             //Собственно колодец
+    int  **map_;                             //Собственно колодец
 };
 
 #endif // WELL_H

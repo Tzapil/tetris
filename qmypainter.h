@@ -15,6 +15,7 @@ public:
 
     virtual void drawPoint(int x, int y);
     virtual void setColor(int r, int g, int b);
+    virtual void setColor(int color);
 private:
     uint width_,
          height_;

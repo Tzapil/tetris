@@ -1,7 +1,9 @@
 #include "qmypainter.h"
 
 QMyPainter::QMyPainter(QWidget& wdg, uint rw, uint rh):width_(rw), height_(rh),p_(&wdg)
-{}
+{
+    p_.setPen(QColor(0, 0, 0));
+}
 
 QMyPainter::~QMyPainter()
 {
@@ -15,6 +17,10 @@ void QMyPainter::drawPoint(int x, int y)
 
 void QMyPainter::setColor(int r, int g, int b)
 {
-    p_.setPen(QColor(0, 0, 0));
     p_.setBrush(QBrush(QColor(r, g, b)));
+}
+
+void QMyPainter::setColor(int color)
+{
+    p_.setBrush(QBrush(QColor(static_cast<Qt::GlobalColor>(color))));
 }

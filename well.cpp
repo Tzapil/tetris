@@ -9,12 +9,12 @@ Well::~Well()
 
 Well::Well(uint w, uint h):width_(w),height_(h)
 {
-    map_ = new bool*[height_];
+    map_ = new int*[height_];
     for(uint y=0; y<height_; ++y)
     {
-        map_[y] = new bool[width_];
+        map_[y] = new int[width_];
         for(uint x=0; x<width_; ++x)
-            map_[y][x] = false;
+            map_[y][x] = 0;
     }
 }
 
@@ -24,7 +24,10 @@ void Well::draw(Painter &p)
         for(uint x=0; x<width_; ++x)
         {
             if(map_[y][x])
+            {
+                p.setColor(map_[y][x]);
                 p.drawPoint(x, y);
+            }
         }
 }
 
@@ -36,7 +39,7 @@ void Well::addFigure(const Figure &f)
             int wx = x + f.x(),
                 wy = y + f.y();
             if(wx >= 0 && wx < width_ && wy >= 0 && wy < height_ )
-                map_[wy][wx] = map_[wy][wx] || f.map(x, y);
+                map_[wy][wx] = map_[wy][wx] | f.map(x, y);
         }
 }
 
@@ -78,7 +81,7 @@ uint Well::checkLines()
                 for(int xx=0; xx<width_; ++xx)
                     map_[yy][xx] = map_[yy-1][xx];
             for(int xx=0; xx<width_; ++xx)
-                map_[0][xx] = false;
+                map_[0][xx] = 0;
         }
     }
 
