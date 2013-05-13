@@ -1,6 +1,6 @@
 #include "qmypainter.h"
 
-QMyPainter::QMyPainter(QWidget& wdg, uint rw, uint rh):width_(rw), height_(rh),p_(&wdg)
+QMyPainter::QMyPainter(QWidget& wdg, uint x, uint y, uint rw, uint rh):width_(rw), height_(rh),p_(&wdg),x_(x),y_(y)
 {
     p_.setPen(QColor(0, 0, 0));
 }

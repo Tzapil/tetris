@@ -10,7 +10,7 @@
 class QMyPainter : public Painter
 {
 public:
-    QMyPainter(QWidget& wdg, uint rw, uint rh);
+    QMyPainter(QWidget& wdg, uint x, uint y, uint rw, uint rh);
     ~QMyPainter();
 
     virtual void drawPoint(int x, int y);
@@ -18,7 +18,8 @@ public:
     virtual void setColor(int color);
 private:
     uint width_,
-         height_;
+         height_,
+         x_, y_;
 
     QPainter p_;
 };

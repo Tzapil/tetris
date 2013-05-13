@@ -3,7 +3,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    setFixedSize(200, 400);
+    setFixedSize(300, 400);
     timer.setInterval(1000);
     QObject::connect(&timer, SIGNAL(timeout()), this, SLOT(timeout()));
     timer.start();
@@ -41,30 +41,19 @@ void MainWindow::keyPressEvent ( QKeyEvent * event )
 
 void MainWindow::paintEvent ( QPaintEvent * event )
 {
-    const uint width_       = this->width(),
+    const uint width_       = this->width() - 100,
                height_      = this->height(),
                fld_width_   = 10,
                fld_height_  = 20,
                rect_width_  = width_/fld_width_,
                rect_height_ = height_/fld_height_;
 
-    //функция рисования квадрата с координатами x, y
-    /*std::function<void (QPainter &, int, int)> drawRect =
-    [rect_width_, rect_height_](QPainter &p_, int x, int y)
-    {
-        p_.drawRect(x*rect_width_, y*rect_height_, rect_width_, rect_height_);
-    };
-
-    QPainter p;
-    p.begin(this);
-    p.setBrush(QBrush(QColor(255, 0, 0)));
-        p.setPen(QColor(0, 0, 0));
-        drawRect(p, 5, 10);
-        drawRect(p, 4, 10);
-        drawRect(p, 3, 10);
-    p.end();*/
-
-    QMyPainter p(*this, rect_width_, rect_height_);
-    p.setColor(255, 0, 0);
+    QPainter pp;
+    pp.begin(this);
+        pp.setPen(QColor(0, 0, 0));
+        pp.drawRect(0, 0, width_, height_);
+        pp.drawText(width_+20, 20, QString("score:") + QString::number(game_.score()*100));
+    pp.end();
+    QMyPainter p(*this, 0, 0, rect_width_, rect_height_);
     game_.draw(p);
 }
