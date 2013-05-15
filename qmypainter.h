@@ -10,7 +10,7 @@
 class QMyPainter : public Painter
 {
 public:
-    QMyPainter(QWidget& wdg, uint x, uint y, uint rw, uint rh);
+    QMyPainter(QWidget& wdg, uint x, uint y, uint rw, uint rh, QPainter *p = 0);
     ~QMyPainter();
 
     virtual void drawPoint(int x, int y);
@@ -21,7 +21,8 @@ private:
          height_,
          x_, y_;
 
-    QPainter p_;
+    bool del_p_;
+    QPainter *p_;
 };
 
 #endif // QMYPAINTER_H

@@ -25,12 +25,13 @@ public:
 
     void keyEvent(Direction d);                 // обработка нажатий клавиш
 
+    inline Figure * next_figure() const {return next_figure_;}
     inline uint score() const {return score_;}
 
 private:
     Well *well_;                                // колодец
-    Figure *figure_;                            // фигура
-
+    Figure *figure_,                            // фигура
+           *next_figure_;
     uint score_;                                // счет
 };
 

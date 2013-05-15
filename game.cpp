@@ -1,11 +1,12 @@
 #include "game.h"
 
-Game::Game(uint w, uint h):score_(0),well_(new Well(w, h)),figure_(new Figure())
+Game::Game(uint w, uint h):score_(0),well_(new Well(w, h)),figure_(new Figure()),next_figure_(new Figure())
 {}
 
 Game::~Game()
 {
     delete figure_;
+    delete next_figure_;
     delete well_;
 }
 
@@ -25,7 +26,8 @@ void Game::move()
         score_ += well_->checkLines();
 
         delete figure_;
-        figure_ = new Figure();
+        figure_ = next_figure_;
+        next_figure_ = new Figure();
 
         if(well_->isCollision(*figure_))
             reset();
@@ -44,9 +46,11 @@ void Game::reset()
 {
     delete well_;
     delete figure_;
+    delete next_figure_;
 
     well_ = new Well();
     figure_ = new Figure();
+    next_figure_ = new Figure();
 }
 
 void Game::keyEvent(Direction d)

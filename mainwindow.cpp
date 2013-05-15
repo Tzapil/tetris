@@ -48,12 +48,16 @@ void MainWindow::paintEvent ( QPaintEvent * event )
                rect_width_  = width_/fld_width_,
                rect_height_ = height_/fld_height_;
 
-    QPainter pp;
-    pp.begin(this);
-        pp.setPen(QColor(0, 0, 0));
-        pp.drawRect(0, 0, width_, height_);
-        pp.drawText(width_+20, 20, QString("score:") + QString::number(game_.score()*100));
-    pp.end();
-    QMyPainter p(*this, 0, 0, rect_width_, rect_height_);
-    game_.draw(p);
+    QPainter *pp = new QPainter();
+    pp->begin(this);
+        pp->setPen(QColor(0, 0, 0));
+        pp->drawRect(0, 0, width_, height_);
+        pp->drawRect( width_ + 10, 10, 80, 100 );
+        pp->drawText(width_+20, 130, QString("score:") + QString::number(game_.score()*100));
+
+        QMyPainter p(*this, 0, 0, rect_width_, rect_height_, pp);
+        QMyPainter np(*this, width_ - 60, 20, rect_width_, rect_height_, pp);
+        game_.next_figure()->draw(np);
+        game_.draw(p);
+    pp->end();
 }

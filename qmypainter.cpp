@@ -1,26 +1,41 @@
 #include "qmypainter.h"
 
-QMyPainter::QMyPainter(QWidget& wdg, uint x, uint y, uint rw, uint rh):width_(rw), height_(rh),p_(&wdg),x_(x),y_(y)
+QMyPainter::QMyPainter(QWidget& wdg, uint x, uint y, uint rw, uint rh, QPainter *p):width_(rw), height_(rh),x_(x),y_(y)
 {
-    p_.setPen(QColor(0, 0, 0));
+    if(p)
+    {
+        p_ = p;
+        del_p_ = false;
+    }
+    else
+    {
+        p_ = new QPainter();
+        p_->begin(&wdg);
+        del_p_ = true;
+    }
+    p_->setPen(QColor(0, 0, 0));
 }
 
 QMyPainter::~QMyPainter()
 {
-    p_.end();
+    if(del_p_)
+    {
+        p_->end();
+        delete p_;
+    }
 }
 
 void QMyPainter::drawPoint(int x, int y)
 {
-    p_.drawRect(x*width_, y*height_, width_, height_);
+    p_->drawRect(x_ + x*width_, y_ + y*height_, width_, height_);
 }
 
 void QMyPainter::setColor(int r, int g, int b)
 {
-    p_.setBrush(QBrush(QColor(r, g, b)));
+    p_->setBrush(QBrush(QColor(r, g, b)));
 }
 
 void QMyPainter::setColor(int color)
 {
-    p_.setBrush(QBrush(QColor(static_cast<Qt::GlobalColor>(color))));
+    p_->setBrush(QBrush(QColor(static_cast<Qt::GlobalColor>(color))));
 }
