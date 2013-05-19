@@ -38,7 +38,7 @@ protected:
     void copy_figure(uint n);                       //метод-утилита, используется для копирования фигуры из массива figures
 
 private:
-    char *map_;                                     //задание фигуры строкой
+    char *map_[4];                                 //задание фигуры строками
 
     uint angle_,                                    //угол поворота (0-3)
          type_;
